@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FTT - User</title>
+<style>
+	body {font-family:Verdana;}
+</style>
+</head>
+<body>
+<h1>Users</h1>
+<!--  get, post ok -->
+<div id="lista"></div>
+</body>
+<script>
+</script>
+</html>
+
+

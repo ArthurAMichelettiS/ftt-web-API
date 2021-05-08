@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+/home/ftt-ambiente/ambiente lp3/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+38219536.index
+4069687491.index
+3027009490.index
+2547393383.index
+1193773639.index
+1136048459.index
+2270454450.index
