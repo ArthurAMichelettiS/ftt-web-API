@@ -16,21 +16,32 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<nav class="navbar">
-      <a href="index.html">Cadastro</a>
-      <a href="lista.html">Lista</a>
-      <a href="grafico.html">Gráfico</a>
-      
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Home</a>
+        <a class="navbar-brand" href="lista.html">Lista</a>
+        <a class="navbar-brand" href="grafico.html">Gráfico</a>
+      </nav>
 <h1>User</h1>
-<form method="put" action="/ftt-WEB-api/user" onLoad="javascript:carregaId()">
-    <p><label for="user-id">ID: </label></br><input type="number" id="user-id" name="user-id" disabled></p>
+<form method="put" action="/ftt-WEB-api/user" >
+    <p><label for="user-id">ID: </label></br><input type="number" id="user-id" name="user-id"></p>
     <p><label for="user-name">Name: </label></br><input type="text" id="user-name" name="user-name" required></p>
     <p><label for="user-email">E-Mail: </label></br><input type="email" id="user-email" name="user-email" required></p>
     <p><label for="user-color">Cor: </label></br><input type="color" id="user-color" name="user-color" required></p>
-    <input class="btao" type="submit"><input type="submit">
+    <input class="btao" type="submit">
 </form>
 </body>
+<script> 
+
+  alert('hey');
+      var id = window.localStorage.getItem('localIdUser');
+    const idDoUser = document.getElementById("user-id");
+    idDoUser.innerHTML = Number(id);
+    idDoUser.value = Number(id);
+    idDoUser.disabled = true;
+    
+</script>
+
 </html>

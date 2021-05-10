@@ -24,9 +24,9 @@
 		  var qtd2 = 0;
 		  var qtd3 = 0;
 		  for(let line of response){
-			qtd1= qtd1+number(line.qtdHappy);
-			qtd2= qtd2+number(line.qtdSad);
-			qtd3= qtd3+number(line.qtdConfused);
+			qtd1= qtd1+Number(line.qtdHappy);
+			qtd2= qtd2+Number(line.qtdSad);
+			qtd3= qtd3+Number(line.qtdConfused);
 		}
 			var ctx = document.getElementById('myChart').getContext('2d');
 			var myChart = new Chart(ctx, {

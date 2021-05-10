@@ -18,10 +18,3 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
   }
-
-  function carregaId(){
-      var id = window.localStorage.getItem('localIdUser');
-    document.getElementById("user-id").innerHTML = id;
-    
-    
-  }

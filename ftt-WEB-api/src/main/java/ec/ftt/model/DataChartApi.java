@@ -19,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import ec.ftt.beans.chart;
+import ec.ftt.beans.Chart;
+import ec.ftt.beans.User;
 import ec.ftt.model.*;
 
 /**
@@ -36,7 +37,7 @@ import ec.ftt.model.*;
 // TODO: PROJETO: Trabalhar bem mensagens de erro da WEB API com try catch
 
 
-@WebServlet("/datachart")
+@WebServlet("/chart")
 public class DataChartApi extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -73,17 +74,17 @@ public class DataChartApi extends HttpServlet {
 	    if(chartId != null) {
 	    	long id = Long.valueOf(chartId);
 	    	
-	    	chartDao chartDao = new chartDao();
+	    	DataChartDao chartDao = new DataChartDao();
 	    	
-	        chart chart = chartDao.getchartById(id);
+	        Chart chart = chartDao.getchartById(id);
 	     	Gson gson = new Gson();
 	    	response.getWriter().append(gson.toJson(chart));
 	    	
 	    } else {
 	    	
-	    	chartDao chartDao = new chartDao();
+	    	DataChartDao chartDao = new DataChartDao();
 	    	
-	    	List<chart> charts = chartDao.getAllchart();
+	    	List<Chart> charts = chartDao.getAllchart();
 	        
 	    	Gson gson = new Gson();
 	    	
@@ -101,7 +102,23 @@ public class DataChartApi extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		Chart u = new Chart(
+				request.getParameter("chart-id"),
+				request.getParameter("chart-happy"),
+				request.getParameter("chart-sad"),
+				request.getParameter("chart-conf")
+				);
 		
+		DataChartDao charDao = new DataChartDao();
+		
+		charDao.addchart(u);
+		
+		System.out.println(u);
+		
+		//response.getWriter().append(u.toString());
+		response.sendRedirect("/ftt-WEB-api/grafico.html");
+    	
     	
 	}
 
@@ -111,13 +128,13 @@ public class DataChartApi extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("application/json"); //mimeType - https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-		chart u = new chart(
+		Chart u = new Chart(
 				request.getParameter("chart-id"),
 				request.getParameter("chart-happy"),
 				request.getParameter("chart-sad"),
 				request.getParameter("chart-conf")
 				);
-		chartDao chartDao = new chartDao();
+		DataChartDao chartDao = new DataChartDao();
 		
 		chartDao.updatechart(u);
 		
@@ -144,7 +161,7 @@ public class DataChartApi extends HttpServlet {
 		//System.out.print("ccccccccccccc");
 		
 		
-		chartDao ud = new chartDao();
+		DataChartDao ud = new DataChartDao();
 		
 		ud.deletechart(chartId);
 		

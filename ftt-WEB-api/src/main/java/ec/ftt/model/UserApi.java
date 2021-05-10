@@ -125,6 +125,7 @@ public class UserApi extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		System.out.println("try111111");
 		response.setContentType("application/json"); //mimeType - https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
 		User u = new User(
 				request.getParameter("user-id"),
@@ -163,7 +164,7 @@ public class UserApi extends HttpServlet {
 		ud.deleteUser(userId);
 		
 		//response.getWriter().append(request.getParameter("userId") + " User removido");
-		response.sendRedirect("ftt-WEB-api/lista.html");
+		response.sendRedirect("ftt-WEB-api/user");
 		}
 	}
 

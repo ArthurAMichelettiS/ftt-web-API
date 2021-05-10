@@ -51,53 +51,74 @@ public class Chart {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setqtdHappy(String id) {
 		
 		if (id.length()==0)
-			setId(0);
+			setqtdHappy(0);
 		else
-			setId(Long.valueOf(id));
+			setqtdHappy(Long.valueOf(id));
 	}
+	public void setqtdSad(String id) {
+		
+		if (id.length()==0)
+			setqtdSad(0);
+		else
+			setqtdSad(Long.valueOf(id));
+	}
+public void setqtdConfused(String id) {
+		
+		if (id.length()==0)
+			setqtdConfused(0);
+		else
+			setqtdConfused(Long.valueOf(id));
+	}
+public void setId(String id) {
+	
+	if (id.length()==0)
+		setId(0);
+	else
+		setId(Long.valueOf(id));
+}
 	/**
 	 * @return the qtdHappy
 	 */
-	public String getqtdHappy() {
+	public long getqtdHappy() {
 		return qtdHappy;
 	}
 	/**
 	 * @param qtdHappy the qtdHappy to set
 	 */
-	public void setqtdHappy(String qtdHappy) {
+	public void setqtdHappy(long qtdHappy) {
 		this.qtdHappy = qtdHappy;
 	}
 	/**
 	 * @return the qtdSad
 	 */
-	public String getqtdSad() {
+	public long getqtdSad() {
 		return qtdSad;
 	}
 	/**
 	 * @param qtdSad the qtdSad to set
 	 */
-	public void setqtdSad(String qtdSad) {
+	public void setqtdSad(long qtdSad) {
 		this.qtdSad = qtdSad;
 	}
 	/**
 	 * @return the qtdConfused
 	 */
-	public String getqtdConfused() {
+	public long getqtdConfused() {
 		return qtdConfused;
 	}
 	/**
 	 * @param qtdConfused the qtdConfused to set
 	 */
-	public void setqtdConfused(String qtdConfused) {
+	public void setqtdConfused(long qtdConfused) {
 		this.qtdConfused = qtdConfused;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", qtdHappy=" + qtdHappy + ", qtdSad=" + qtdSad + ", qtdConfused=" + qtdConfused + "]";
+		return "Chart [id=" + id + ", qtdHappy=" + qtdHappy + ", qtdSad=" + qtdSad + ", qtdConfused=" + qtdConfused + "]";
 	}
 
 	@Override
@@ -113,7 +134,7 @@ public class Chart {
 		if (!(obj instanceof User)) {
 			return false;
 		}
-		User other = (User) obj;
+		Chart other = (Chart) obj;
 		return Objects.equals(qtdConfused, other.qtdConfused) && Objects.equals(qtdSad, other.qtdSad) && id == other.id
 				&& Objects.equals(qtdHappy, other.qtdHappy);
 	}

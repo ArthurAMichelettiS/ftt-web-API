@@ -7,28 +7,29 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import ec.ftt.beans.chart;
+
+import ec.ftt.beans.Chart;
 import ec.ftt.model.DBUtil;
 
-public class chartDao {
+public class DataChartDao {
 
     private Connection connection;
 
-    public chartDao() {
+    public DataChartDao() {
         connection = DBUtil.getConnection();
     } //chartDao
 
-    public void addchart(chart chart) {
+    public void addchart(Chart chart) {
         
     	try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO CHART (Happy, Sad, Confused) VALUES (?, ?, ?)");
+                    .prepareStatement("INSERT INTO chart (qtdHappy, qtdSad, qtdConfused) VALUES (?, ?, ?)");
             
             // Parameters start with 1
-            preparedStatement.setString(1, chart.qtdHappy());
-            preparedStatement.setString(2, chart.getqtdSad());
+            preparedStatement.setLong(1, chart.getqtdHappy());
+            preparedStatement.setLong(2, chart.getqtdSad());
             //preparedStatement.setDate(3, (java.sql.Date)chart.getDob());
-            preparedStatement.setString(3, chart.getqtdConfused());
+            preparedStatement.setLong(3, chart.getqtdConfused());
 
             
             preparedStatement.executeUpdate();
@@ -40,14 +41,14 @@ public class chartDao {
     
     public void deletechart(Long id) {
     	
-    	chart chart = new chart();
+    	Chart chart = new Chart();
     	chart.setId(id);
     	
     	deletechart(chart);
     	
     } // deletechart long
 
-    public void deletechart(chart chart) {
+    public void deletechart(Chart chart) {
         try {
             
         	PreparedStatement preparedStatement = connection
@@ -62,12 +63,12 @@ public class chartDao {
         }
     } //deletechart
 
-    public void updatechart(chart chart) {
+    public void updatechart(Chart chart) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE chart SET Happy=?, " 
-                    		                          + "Sad=?, " 
-                    		                          + "Confused=? " 
+                    .prepareStatement("UPDATE chart SET qtdHappy=?, " 
+                    		                          + "qtdSad=?, " 
+                    		                          + "qtdConfused=? " 
                                                + "WHERE ID=?");
             
             // Parameters start with 1
@@ -85,22 +86,22 @@ public class chartDao {
         }
     } //updatechart
 
-    public List<chart> getAllchart() {
+    public List<Chart> getAllchart() {
         
-    	List<chart> chartList = new ArrayList<chart>();
+    	List<Chart> chartList = new ArrayList<Chart>();
         
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM chart");
             while (rs.next()) {
                 
-            	chart chart = new chart();
+            	Chart chart = new Chart();
                 
             	chart.setId(rs.getLong("ID"));
-                chart.setName(rs.getString("Happy"));
-                chart.setEmail(rs.getString("Sad"));
+                chart.setqtdHappy(rs.getLong("qtdHappy"));
+                chart.setqtdSad(rs.getLong("qtdSad"));
                 //chart.setDob(rs.getDate("DOB"));
-                chart.setColor(rs.getString("Confused"));
+                chart.setqtdConfused(rs.getLong("qtdConfused"));
 
                 chartList.add(chart);
             }
@@ -111,9 +112,9 @@ public class chartDao {
         return chartList;
     } //getAllchart
 
-    public chart getchartById(Long id) {
+    public Chart getchartById(Long id) {
     	
-    	chart chart = new chart();
+    	Chart chart = new Chart();
     	chart.setId(id);
     	
     	return getchartById(chart);
@@ -122,9 +123,9 @@ public class chartDao {
     
     
     	
-    public chart getchartById(chart chart) {
+    public Chart getchartById(Chart chart) {
 
-    	chart chartOutput = new chart();
+    	Chart chartOutput = new Chart();
         
     	try {
             PreparedStatement preparedStatement = connection.
@@ -134,11 +135,12 @@ public class chartDao {
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
+            	
             	chartOutput.setId(rs.getLong("ID"));
-            	chartOutput.setName(rs.getString("Happy"));
-            	chartOutput.setEmail(rs.getString("Sad"));
+            	chartOutput.setqtdHappy(rs.getLong("qtdHappy"));
+            	chartOutput.setqtdSad(rs.getLong("qtdSad"));
             	//chartOutput.setDob(rs.getDate("DOB"));
-            	chartOutput.setColor(rs.getString("Confused"));
+            	chartOutput.setqtdConfused(rs.getLong("qtdConfused"));
 
             }
         } catch (SQLException e) {
