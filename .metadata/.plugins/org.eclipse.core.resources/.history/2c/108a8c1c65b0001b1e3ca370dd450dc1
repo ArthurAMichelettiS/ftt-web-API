@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<nav class="navbar">
+      <a href="index.html">Cadastro</a>
+      <a href="lista.html">Lista</a>
+      <a href="grafico.html">Gráfico</a>
+      
+    </nav>
+
+</body>
+</html>

@@ -116,32 +116,9 @@ public class UserApi extends HttpServlet {
 		
 		System.out.println(u);
 		
-		response.getWriter().append(u.toString());
-  	
-    	/*List<User> users = userDao.getAllUser();
-        
-    	Gson gson = new Gson();
+		//response.getWriter().append(u.toString());
+		response.sendRedirect("/ftt-WEB-api/lista.html");
     	
-	    ScriptEngineManager manager = new ScriptEngineManager();
-	    ScriptEngine engine = manager.getEngineByName("JavaScript");
-	    
-	    try {
-	    	//
-			engine.eval(Files.newBufferedReader(Paths.get("/home/ftt-ambiente/ambiente lp3/ftt-WEB-api/src/main/webapp/site.js"), StandardCharsets.UTF_8));
-			
-		    Invocable inv = (Invocable) engine;
-			inv.invokeFunction("createNewsCards", gson.toJson(users));
-		    
-		} catch (ScriptException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 
 	/**
@@ -184,10 +161,10 @@ public class UserApi extends HttpServlet {
 		
 		response.setStatus(418); //200 - OK - Padrão (Default)
 
-		if (request.getParameter("user-id") == null)
+		if (request.getParameter("userId") == null)
 			 response.sendError(407, "Informe o ID do usuário a ser retornado!!!" );
 		else {
-		Long userId = Long.valueOf(request.getParameter("user-id"));
+		Long userId = Long.valueOf(request.getParameter("userId"));
 		
 		
 		
@@ -195,7 +172,7 @@ public class UserApi extends HttpServlet {
 		
 		ud.deleteUser(userId);
 		
-		response.getWriter().append(request.getParameter("user-id") + " User removido");
+		response.getWriter().append(request.getParameter("userId") + " User removido");
 		
 		}
 	}

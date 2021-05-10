@@ -18,6 +18,7 @@
       request.open("GET", "/ftt-WEB-api/user");
 
       request.onload = function () {
+
         const response = JSON.parse(this.responseText);
         console.log(JSON.parse(this.responseText));
         const table = document.querySelector(".table-body");
@@ -30,11 +31,17 @@
           name.innerHTML = line.name;
           row.appendChild(name);
           var email = document.createElement("td");
-          producer.innerHTML = line.email;
+          email.innerHTML = line.email;
           row.appendChild(email);
           var color = document.createElement("td");
-          releaseDate.innerHTML = line.color;
+          color.innerHTML = line.color;
           row.appendChild(color);
+          var deleta =  document.createElement("td");
+          var link =  document.createElement("a");
+          link.innerHTML = "Deleta";
+          deleta.appendChild(link)
+          link.href = "javascript:deletar("+line.id+");";
+          row.appendChild(deleta);
           table.appendChild(row);
         }
         console.log(table)
@@ -46,17 +53,33 @@
 
       request.send();
     </script>
- 
+ 	<script>
+ 	function deletar(id){
+ 		const request = new XMLHttpRequest();
+ 	      request.open("DELETE", "/ftt-WEB-api/user");
+		  request.userId = id;
+ 	      request.onload = function () {
+ 	    	  
+ 	      }
+ 	     request.onerror = function () {
+ 	        alert("erro ao executar a requisição");
+ 	      };
+ 	      request.send();
+
+ 	}
+ 	</script>
 </head>
 <body>
-<h1>User</h1>
-<!--  get, post ok -->
-<div></div>
-</form>
-    <nav class="navbar">
+<nav class="navbar">
       <a href="index.html">Cadastro</a>
       <a href="lista.html">Lista</a>
+      <a href="grafico.html">Gráfico</a>
+      
     </nav>
+<h1>Users</h1>
+<!--  get, post ok -->
+<div></div>
+
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
@@ -64,6 +87,7 @@
           <th scope="col">Nome</th>
           <th scope="col">email</th>
           <th scope="col">cor</th>
+          <th scope="col">deleta</th>
         </tr>
       </thead>
       <tbody class="table-body">
