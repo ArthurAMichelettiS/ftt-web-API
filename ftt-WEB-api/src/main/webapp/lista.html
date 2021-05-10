@@ -36,6 +36,14 @@
           var color = document.createElement("td");
           color.innerHTML = line.color;
           row.appendChild(color);
+          
+          var edita =  document.createElement("td");
+          var linkE =  document.createElement("a");
+          linkE.innerHTML = "Edita";
+          edita.appendChild(linkE)
+          link.href = "javascript:editar("+line.id+");";
+          row.appendChild(edita);
+          
           var deleta =  document.createElement("td");
           var link =  document.createElement("a");
           link.innerHTML = "Deleta";
@@ -48,7 +56,7 @@
       };
 
       request.onerror = function () {
-        console.log("erro ao executar a requisição");
+        alert("erro ao executar a requisição");
       };
 
       request.send();
@@ -68,15 +76,32 @@
  	      request.send();
 
  	}
+
+   function editar(id){
+    window.localStorage.setItem('localIdUser', id);
+    window.location.href = "editaUser.html";
+ 		/*const request = new XMLHttpRequest();
+ 	      request.open("PUT", `/ftt-WEB-api/user?userId=${id}`);
+		  request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+ 	      request.onload = function () {
+ 	    	  
+ 	      }
+ 	     request.onerror = function () {
+ 	        alert("erro ao executar a requisição");
+ 	      };
+ 	      //var params = '{"userId": id}';
+ 	      request.send();*/
+
+ 	}
+
  	</script>
 </head>
 <body>
-<nav class="navbar">
-      <a href="index.html">Cadastro</a>
-      <a href="lista.html">Lista</a>
-      <a href="grafico.html">Gráfico</a>
-      
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="index.html">Home</a>
+    <a class="navbar-brand" href="lista.html">Lista</a>
+    <a class="navbar-brand" href="grafico.html">Gráfico</a>
+  </nav>
 <h1>Users</h1>
 <!--  get, post ok -->
 <div></div>
@@ -88,7 +113,8 @@
           <th scope="col">Nome</th>
           <th scope="col">email</th>
           <th scope="col">cor</th>
-          <th scope="col">deleta</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Deleta</th>
         </tr>
       </thead>
       <tbody class="table-body">
