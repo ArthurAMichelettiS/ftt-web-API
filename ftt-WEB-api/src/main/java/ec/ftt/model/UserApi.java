@@ -161,19 +161,21 @@ public class UserApi extends HttpServlet {
 		
 		response.setStatus(418); //200 - OK - Padrão (Default)
 
-		if (request.getParameter("userId") == null)
-			 response.sendError(407, "Informe o ID do usuário a ser retornado!!!" );
+		if (request.getParameter("userId") == null) {
+			System.out.print("bbbbbbbbbbbb");
+			response.sendError(407, "Informe o ID do usuário a ser retornado!!!" );
+		}
 		else {
 		Long userId = Long.valueOf(request.getParameter("userId"));
-		
+		System.out.print("ccccccccccccc");
 		
 		
 		UserDao ud = new UserDao();
 		
 		ud.deleteUser(userId);
 		
-		response.getWriter().append(request.getParameter("userId") + " User removido");
-		
+		//response.getWriter().append(request.getParameter("userId") + " User removido");
+		response.sendRedirect("ftt-WEB-api/lista.html");
 		}
 	}
 

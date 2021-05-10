@@ -56,14 +56,15 @@
  	<script>
  	function deletar(id){
  		const request = new XMLHttpRequest();
- 	      request.open("DELETE", "/ftt-WEB-api/user");
-		  request.userId = id;
+ 	      request.open("DELETE", `/ftt-WEB-api/user?userId=${id}`);
+		  request.setRequestHeader("Content-type", "application/json; charset=utf-8");
  	      request.onload = function () {
  	    	  
  	      }
  	     request.onerror = function () {
  	        alert("erro ao executar a requisição");
  	      };
+ 	      //var params = '{"userId": id}';
  	      request.send();
 
  	}

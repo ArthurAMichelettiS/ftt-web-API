@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>FTT - User</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" type="text/javascript"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      const request = new XMLHttpRequest();
+      request.open("GET", "/ftt-WEB-api/user");
+
+      request.onload = function () {
+
+        const response = JSON.parse(this.responseText);
+        console.log(JSON.parse(this.responseText));
+        const table = document.querySelector(".table-body");
+        for(let line of response){
+          var row = document.createElement("tr");
+          var id = document.createElement("td");
+          id.innerHTML = line.id;
+          row.appendChild(id);
+          var name = document.createElement("td");
+          name.innerHTML = line.name;
+          row.appendChild(name);
+          var email = document.createElement("td");
+          email.innerHTML = line.email;
+          row.appendChild(email);
+          var color = document.createElement("td");
+          color.innerHTML = line.color;
+          row.appendChild(color);
+          var deleta =  document.createElement("td");
+          var link =  document.createElement("a");
+          link.innerHTML = "Deleta";
+          deleta.appendChild(link)
+          link.href = "javascript:deletar("+line.id+");";
+          row.appendChild(deleta);
+          table.appendChild(row);
+        }
+        console.log(table)
+      };
+
+      request.onerror = function () {
+        console.log("erro ao executar a requisição");
+      };
+
+      request.send();
+    </script>
+ 	<script>
+ 	function deletar(id){
+ 		const request = new XMLHttpRequest();
+ 	      request.open("DELETE", "/ftt-WEB-api/user");
+		  request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+ 	      request.onload = function () {
+ 	    	  
+ 	      }
+ 	     request.onerror = function () {
+ 	        alert("erro ao executar a requisição");
+ 	      };
+ 	      var params = {"userId": id};
+ 	      request.send(params);
+
+ 	}
+ 	</script>
+</head>
+<body>
+<nav class="navbar">
+      <a href="index.html">Cadastro</a>
+      <a href="lista.html">Lista</a>
+      <a href="grafico.html">Gráfico</a>
+      
+    </nav>
+<h1>Users</h1>
+<!--  get, post ok -->
+<div></div>
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">email</th>
+          <th scope="col">cor</th>
+          <th scope="col">deleta</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+       
+      </tbody>
+    </table>
+
+</body>
+</html>
